@@ -1,0 +1,146 @@
+:root {
+  --primary: #006eff;
+  --primary-dark: #003f92;
+  background-color: #111;
+  color: white;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: "Montserrat", sans-serif;
+}
+
+input {
+  border: none;
+  background: #fafafa;
+  color: 000;
+  margin: 0 1em 0 0;
+  border-radius: 2px;
+  padding: 10px;
+}
+
+button {
+  margin: 0 1em 0 0;
+}
+
+ul {
+  list-style: none;
+  margin: 1em;
+  overflow: auto;
+}
+
+.main {
+  margin: 1em;
+}
+
+/* Radio Style */
+
+.radio-methods .container {
+  display: block;
+  position: relative;
+  border-radius: 2px;
+  padding: 0 10px 0 30px;
+  margin: 0.5em;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.radio-methods .container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-methods .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #ddd;
+  border-radius: 50%;
+}
+
+.radio-methods .container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.radio-methods .container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+.radio-methods .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.radio-methods .container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.radio-methods .container .checkmark:after {
+  top: 4.5px;
+  left: 4.5px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: white;
+}
+
+/* Checkbox Style */
+
+.buttons .container {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  border-radius: 2px;
+  padding: 0px 10px 0px 30px;
+  line-height: 30px;
+  background-color: #2196f3;
+  color: white;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.buttons .container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.buttons .container:hover {
+  background-color: #0072be;
+}
+
+.buttons .checkmark {
+  margin: 1px 2px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+}
+
+.buttons .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.buttons .container input:checked ~ .checkmark:after {
+  display: block;
+}

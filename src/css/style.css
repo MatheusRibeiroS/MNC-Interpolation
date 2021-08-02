@@ -1,0 +1,119 @@
+div.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Scrollbar in result Div */
+
+div::-webkit-scrollbar {
+  height: 8px;
+}
+
+div::-webkit-scrollbar-track {
+  background: #eee;
+  border-radius: 10px;
+}
+
+div::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 10px;
+}
+
+/* Buttons Style */
+
+div.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+div.buttons :last-child {
+  margin: 0;
+}
+
+.btn {
+  color: #ffffff;
+  background-color: #0099ff;
+  border: none;
+  border-radius: 2px;
+  padding: 5px 10px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0072be;
+}
+
+.btn.submit {
+  width: 100%;
+  height: 3em;
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Só para verificar a border */
+.options-menu {
+  margin: 0 0 1em 0;
+  padding: 1em;
+  border-radius: 10px;
+  background-color: #eee;
+}
+
+.input-menu input {
+  margin: 0 0 10px 0;
+}
+
+.input-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.radio-methods {
+  margin: 1em 0;
+}
+
+div.options-menu {
+  color: black;
+}
+
+/* Matrix style */
+
+.matrix input {
+  width: 5em;
+  margin: 0 0.5em 0.5em 0;
+}
+
+.matrix th:last-child input {
+  background-color: black;
+  color: azure;
+  font-weight: bold;
+  width: 4em;
+  margin: 0;
+}
+
+.matrix-label {
+  padding: 0 0.5em 0 0;
+  text-align: center;
+}
+
+.matrix tr th:nth-child(1) {
+  font-weight: bold;
+  padding: 0.5em 1em;
+}
