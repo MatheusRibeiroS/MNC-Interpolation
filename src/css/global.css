@@ -39,6 +39,13 @@ ul {
   margin: 1em;
 }
 
+.chart {
+  margin: 0 0 1em 0;
+  padding: 1em;
+  border-radius: 10px;
+  background-color: #eee;
+}
+
 /* Radio Style */
 
 .radio-methods .container {
