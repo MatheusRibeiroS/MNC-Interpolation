@@ -9,6 +9,8 @@
 
   <link rel="stylesheet" href="./src/css/global.css">
   <link rel="stylesheet" href="./src/css/style.css">
+  <link rel="icon" href="./assets/img/favicon.ico">
+
   <title>MNC-Linear-Systems</title>
 </head>
 
@@ -21,73 +23,82 @@
       <span>Aplicação para calcular interpolação polinomial</span>
     </div>
 
-    <!-- Options menu -->
-    <div class="options-menu">
+    <!-- Application content -->
+    <div class="content">
 
-      <!-- Essential settings -->
-      <div class="config">
-        <div class="input-menu">
-          <input type="number" id="n" min="3" max="20" placeholder="Número n de pontos (com 0 < n)" style="width: 100%;"
-            oninput="resize()" />
+      <!-- Options menu -->
+      <div class="options-menu">
 
-          <input type="number" id="n" min="3" max="20" placeholder="Grau do Polinômio (k, se k < n)"
-            style="width: 100%;" />
+        <!-- Essential settings -->
+        <div class="config">
+          <div class="input-menu">
+            <input type="number" id="n" min="1" max="20" placeholder="Número n de pontos (com 0 < n)"
+              style="width: 100%;" oninput="resize()" />
 
-          <input type="number" id="n" min="1" max="20" placeholder="Ponto de Referência (z se k < n)"
-            style="width: 100%;" />
-        </div>
-        <!-- Calculation Buttons -->
-        <div class="buttons" style="display: inline-flex; width: 100%; align-items: center; margin-bottom: 1em;">
-          <button class="btn" id="button-info"><i class="fas fa-info-circle"></i></button>
-          <button class="btn" id="button-docs" onclick="info()"><i class="fas fa-file-alt"></i></button>
-          <button class="btn" id="button-clear" onclick="clear()"><i class="fas fa-trash"></i></button>
-          <button class="btn" id="button-calculate" onclick="calculate()" style="width: 100%;"><i
-              class="fas fa-calculator"></i>
-            Calcular
-          </button>
-        </div>
-        <!-- Vector with points -->
-        <div class="matrix" id="config-matrix" style="width: 100%; overflow: auto;" />
+            <input type="number" id="k" min="3" max="20" placeholder="Grau do Polinômio (k, se k < n)"
+              style="width: 100%;" />
 
-        <div class="radio-methods">
-          <div>
-            <span class="divider-methods">Métodos</span>
+            <input type="number" id="z" min="1" placeholder="Ponto de Referência (z se k < n)" style="width: 100%;" />
+          </div>
+          <!-- Calculation Buttons -->
+          <div class="buttons" style="display: inline-flex; width: 100%; align-items: center; margin-bottom: 1em;">
+            <button class="btn" id="button-info"><i class="fas fa-info-circle"></i></button>
+            <button class="btn" id="button-docs" onclick="info()"><i class="fas fa-file-alt"></i></button>
+            <button class="btn" id="button-clear" onclick="clear()"><i class="fas fa-trash"></i></button>
+            <button class="btn" id="button-calculate" onclick="calculate()" style="width: 50%;">
+              <i class="fas fa-calculator"></i>
+              Calcular
+            </button>
+          </div>
+          <!-- Vector with points -->
+          <div id="config-table" style="width: 100%; overflow: auto;">
+            <div class="matrix" id="table" style="width: 100%; overflow: auto;"></div>
+          </div>
 
-            <ul>
-              <!-- Default: SISTEMA LINEAR -->
-              <li class="switcher-methods">
-                <label class="container" for="simpleGauss" class="radio">
-                  Interpolação com Sistema Linear
-                  <input type="radio" value=1 id="simpleGauss" name="methods" checked />
-                  <span class="checkmark"></span>
-                </label>
-              </li>
+          <div class="radio-methods">
+            <div>
+              <span class="divider-methods">Métodos</span>
 
-              <li class="switcher-methods">
-                <label class="container" for="partialpivotGauss" class="radio">
-                  Interpolação por Newton
-                  <input type="radio" value=2 id="partialpivotGauss" name="methods" />
-                  <span class="checkmark"></span>
-                </label>
-              </li>
+              <ul>
+                <!-- Default: SISTEMA LINEAR -->
+                <li class="switcher-methods">
+                  <label class="container" for="simpleGauss" class="radio">
+                    Interpolação com Sistema Linear
+                    <input type="radio" value=1 id="simpleGauss" name="methods" checked />
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
 
-              <li class="switcher-methods">
-                <label class="container" for="pivotGauss" class="radio">
-                  Interpolação por Newton-Gregory
-                  <input type="radio" value=3 id="pivotGauss" name="methods" />
-                  <span class="checkmark"></span>
-                </label>
-              </li>
+                <li class="switcher-methods">
+                  <label class="container" for="partialpivotGauss" class="radio">
+                    Interpolação por Newton
+                    <input type="radio" value=2 id="partialpivotGauss" name="methods" />
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
 
-            </ul>
+                <li class="switcher-methods">
+                  <label class="container" for="pivotGauss" class="radio">
+                    Interpolação por Newton-Gregory
+                    <input type="radio" value=3 id="pivotGauss" name="methods" />
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+
+              </ul>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
+
+    <div class="chart" id="chart"></div>
 
   </div>
 
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" data-auto-a11y="true"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="./src/js/functions.js"></script>
   <script src="./src/js/methods.js"></script>
 </body>

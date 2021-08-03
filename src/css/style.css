@@ -55,7 +55,7 @@ div.buttons :last-child {
 }
 
 /* Só para verificar a border */
-.options-menu {
+.content {
   margin: 0 0 1em 0;
   padding: 1em;
   border-radius: 10px;
