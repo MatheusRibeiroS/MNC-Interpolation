@@ -68,3 +68,64 @@ const pointsOrdering = () => {
     cell.value = points[j];
   }
 };
+
+const calculate = () => {
+  let n = parseInt(document.querySelector(`#n`).value);
+  let k = parseInt(document.querySelector(`#k`).value);
+
+  if (isNaN(n) || isNaN(k)) {
+    console.log("Insira valores válidos para n e k.");
+    alert(`Insira valores válidos para n e k.`);
+    return;
+  }
+  if (n < 1 || k < 1 || n < k) {
+    console.log("Insira valores válidos para n e k.")
+    alert("Insira valores válidos para n e k.");
+    return;
+  }
+  pointsOrdering();
+  let z = parseInt(document.querySelector(`#z`).value);
+  if (isNaN(z) || z < 1 || z > n) {
+    console.log("Insira valores válidos para z.");
+    alert("Insira um valor válido para z.");
+    return;
+  }
+  let left = z, right = z;
+  let aux = 1;
+  while (aux < k) {
+    if (left > 1) {
+      left--;
+      aux++;
+    }
+    if (right < n && aux < k) {
+      right++;
+      aux++;
+    }
+  }
+  for (let i = 0; i < k; i++) {
+    points[i] = new Array(2);
+    Xaux = parseFloat(document.querySelector(`P${left - 1}${1}`).value);
+    Yaux = parseFloat(document.querySelector(`P${left - 1}${2}`).value);
+    left++;
+    points[i][0] = Xaux;
+    points[i][1] = Yaux;
+  }
+  let method = document.getElementsByName(`methods`);
+  let polynomial;
+
+  // correct function structure
+
+  /*
+  if (method[0].checked) polynomial = // funcao sistema linear
+  else if (method[1].checked) polynomial = NewtonMethod();
+  else polynomial = NewtonGregoryMet();
+  document.getElementById(`pRes`).innerText = polynomial;
+  */
+
+  if (method[0].checked) polynomial = new NewtonMethod();
+  else if (method[1].checked) polynomial = new NewtonGregoryMet();
+
+  // Definir onde será colocado o resultado na tela
+
+  document.getElementById(`Resultado`).innerText = polynomial;
+};
