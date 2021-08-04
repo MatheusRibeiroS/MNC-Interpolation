@@ -38,34 +38,32 @@ const resize = () => {
 
 const getPoints = () => {
   let auxX = [],
-    auxY = [];
+    auxY = [],
+    xy = [];
 
-  // row[0].cells.length - 1 , equals the number of columns from 1
+  // "row[0].cells.length - 1" , equals the number of columns from 1
   let row = document.getElementsByTagName("table")[0].rows;
   for (let i = 1; i <= row[0].cells.length - 1; i++) {
     auxX.push(row[1].cells[i].firstChild.value);
     auxY.push(row[2].cells[i].firstChild.value);
   }
 
-  return { x: auxX, y: auxY };
+  // pairs x and y -> P(x,y)
+  auxX.forEach((element, index) => {
+    xy.push([element, auxY[index]]);
+  });
+
+  return { xy, matrix: [auxX, auxY] };
 };
 
-const pointsOrdering = () => {
-  let n = parseInt(document.querySelector("#n").value);
-  let points = new Array(n);
-  let i = 0;
-  for (let j = 0; j < n; j++) {
-    points[j] = document.querySelector(`#point${j}1`).value;
-    points[j] = parseInt(points[j]);
-    if (isNaN(points[j])) {
-      points[j] = 0;
-    }
-  }
-  points.sort((a, b) => a - b);
-  for (let j = 0; j < n; j++) {
-    let cell = document.querySelector(`#point${j}1`);
-    cell.value = points[j];
-  }
+const orderedPoints = () => {
+  let { xy } = getPoints();
+
+  xy.sort((a, b) => a[0] - b[0]); // Sorting by x
+  x = xy.forEach((element) => element.shift()); // Removing x
+  y = xy;
+
+  return { x, y };
 };
 
 const calculate = () => {
@@ -78,7 +76,7 @@ const calculate = () => {
     return;
   }
   if (n < 1 || k < 1 || n < k) {
-    console.log("Insira valores válidos para n e k.")
+    console.log("Insira valores válidos para n e k.");
     alert("Insira valores válidos para n e k.");
     return;
   }
@@ -89,7 +87,8 @@ const calculate = () => {
     alert("Insira um valor válido para z.");
     return;
   }
-  let left = z, right = z;
+  let left = z,
+    right = z;
   let aux = 1;
   while (aux < k) {
     if (left > 1) {
