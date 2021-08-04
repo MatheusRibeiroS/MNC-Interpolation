@@ -37,8 +37,7 @@ const resize = () => {
 };
 
 const getPoints = () => {
-  let matrix = [],
-    auxX = [],
+  let auxX = [],
     auxY = [];
 
   // row[0].cells.length - 1 , equals the number of columns from 1
