@@ -109,7 +109,7 @@ const calculate = () => {
     points[i][0] = Xaux;
     points[i][1] = Yaux;
   }
-  let method = document.getElementsByName(`methods`);
+  let method = document.querySelector(`methods`);
   let polynomial;
 
   // correct function structure
@@ -126,5 +126,5 @@ const calculate = () => {
 
   // Definir onde será colocado o resultado na tela
 
-  document.getElementById(`Resultado`).innerText = polynomial;
+  document.querySelector(`Resultado`).innerText = polynomial;
 };
