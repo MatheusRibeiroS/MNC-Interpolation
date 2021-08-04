@@ -66,27 +66,41 @@ const orderedPoints = () => {
   return { x, y };
 };
 
+const verification = () => {
+  let n = document.querySelector(`#n`).value;
+  let k = document.querySelector(`#k`).value;
+  let z = document.querySelector(`#z`).value;
+
+  if (
+    isNaN(parseInt(n)) ||
+    isNaN(parseInt(k)) ||
+    isNaN(parseInt(z)) ||
+    parseInt(n) < 1 ||
+    parseInt(k) < 1 ||
+    parseInt(z) < 1 ||
+    parseInt(z) > parseInt(n)
+  ) {
+    console.log("Insira valores válidos para n, k e z.");
+    // document.querySelector(`#result`).innerText = "Insira valores válidos para n, k e z.";
+    document.querySelector(`#n`).value = "";
+    document.querySelector(`#k`).valuek = "";
+    document.querySelector(`#z`).value = "";
+    return false;
+  }
+  return true;
+};
+
 const calculate = () => {
+  if (!verification()) {
+    return;
+  }
+
   let n = parseInt(document.querySelector(`#n`).value);
   let k = parseInt(document.querySelector(`#k`).value);
-
-  if (isNaN(n) || isNaN(k)) {
-    console.log("Insira valores válidos para n e k.");
-    alert(`Insira valores válidos para n e k.`);
-    return;
-  }
-  if (n < 1 || k < 1 || n < k) {
-    console.log("Insira valores válidos para n e k.");
-    alert("Insira valores válidos para n e k.");
-    return;
-  }
-  pointsOrdering();
   let z = parseInt(document.querySelector(`#z`).value);
-  if (isNaN(z) || z < 1 || z > n) {
-    console.log("Insira valores válidos para z.");
-    alert("Insira um valor válido para z.");
-    return;
-  }
+
+  let { x, y } = orderedPoints(); // x and y are ordered by x
+
   let left = z,
     right = z;
   let aux = 1;
