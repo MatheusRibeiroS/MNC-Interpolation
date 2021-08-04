@@ -60,8 +60,8 @@ const orderedPoints = () => {
   let { xy } = getPoints();
 
   xy.sort((a, b) => a[0] - b[0]); // Sorting by x
-  x = xy.forEach((element) => element.shift()); // Removing x
-  y = xy;
+  let x = xy.map((element) => element[0]);
+  let y = xy.map((element) => element[1]);
 
   return { x, y };
 };
@@ -140,4 +140,36 @@ const calculate = () => {
   // Definir onde será colocado o resultado na tela
 
   document.querySelector(`Resultado`).innerText = polynomial;
+};
+
+const genChart = () => {
+  let chartCanvas = document.querySelector("#chart");
+  let chartDiv = document.querySelector("#chart-div");
+
+  chartDiv.style.display = "block";
+  const { x, y } = orderedPoints(); // x and y are ordered by x
+
+  const data = {
+    labels: x,
+    datasets: [
+      {
+        label: "P(x,y) = ",
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: y,
+      },
+    ],
+  };
+
+  const config = {
+    type: "line",
+    data: data,
+    options: {},
+  };
+
+  const myChart = new Chart(chartCanvas, config);
 };

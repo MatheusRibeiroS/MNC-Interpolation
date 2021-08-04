@@ -16,6 +16,11 @@ html {
   font-family: "Montserrat", sans-serif;
 }
 
+body {
+  display: flex;
+  justify-content: center;
+}
+
 input {
   border: none;
   background: #fafafa;
@@ -36,10 +41,12 @@ ul {
 }
 
 .main {
+  width: 460px;
   margin: 1em;
 }
 
 .chart {
+  display: none;
   margin: 0 0 1em 0;
   padding: 1em;
   border-radius: 10px;
