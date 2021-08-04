@@ -22,6 +22,8 @@ const resize = () => {
   row.map((element, index) => {
     element.appendChild(cells[index]);
   });
+  // tableBody.appendChild(row);
+
   for (let index = 0; index < n; index++) {
     cells[0] = document.createElement("th");
     cells[0].innerHTML = index + 1;
@@ -32,4 +34,39 @@ const resize = () => {
     for (let j = 0; j < 3; j++) row[j].appendChild(cells[j]);
   }
   for (let index = 0; index < 3; index++) table.appendChild(row[index]);
+};
+
+const getPoints = () => {
+  let matrix = [],
+    auxX = [],
+    auxY = [];
+
+  // row[0].cells.length - 1 , equals the number of columns from 1
+  let row = document.getElementsByTagName("table")[0].rows;
+  for (let j = 1; j <= row[0].cells.length - 1; j++) {
+    auxX.push(row[1].cells[j].firstChild.value);
+    auxY.push(row[2].cells[j].firstChild.value);
+  }
+  matrix.push(auxX);
+  matrix.push(auxY);
+
+  return { matrix };
+};
+
+const pointsOrdering = () => {
+  let n = parseInt(document.querySelector("#n").value);
+  let points = new Array(n);
+  let i = 0;
+  for (let j = 0; j < n; j++) {
+    points[j] = document.querySelector(`#point${j}1`).value;
+    points[j] = parseInt(points[j]);
+    if (isNaN(points[j])) {
+      points[j] = 0;
+    }
+  }
+  points.sort((a, b) => a - b);
+  for (let j = 0; j < n; j++) {
+    let cell = document.querySelector(`#point${j}1`);
+    cell.value = points[j];
+  }
 };
