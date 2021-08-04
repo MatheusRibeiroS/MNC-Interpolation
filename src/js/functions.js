@@ -47,10 +47,8 @@ const getPoints = () => {
     auxX.push(row[1].cells[i].firstChild.value);
     auxY.push(row[2].cells[i].firstChild.value);
   }
-  matrix.push(auxX);
-  matrix.push(auxY);
 
-  return { matrix };
+  return { x: auxX, y: auxY };
 };
 
 const pointsOrdering = () => {
