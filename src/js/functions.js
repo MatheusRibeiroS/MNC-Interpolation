@@ -43,9 +43,9 @@ const getPoints = () => {
 
   // row[0].cells.length - 1 , equals the number of columns from 1
   let row = document.getElementsByTagName("table")[0].rows;
-  for (let j = 1; j <= row[0].cells.length - 1; j++) {
-    auxX.push(row[1].cells[j].firstChild.value);
-    auxY.push(row[2].cells[j].firstChild.value);
+  for (let i = 1; i <= row[0].cells.length - 1; i++) {
+    auxX.push(row[1].cells[i].firstChild.value);
+    auxY.push(row[2].cells[i].firstChild.value);
   }
   matrix.push(auxX);
   matrix.push(auxY);
