@@ -63,13 +63,16 @@ ul {
   background-color: #eee;
 }
 
-
 .result {
   display: none;
   margin: 0 0 1em 0;
   padding: 1em;
   border-radius: 10px;
   background-color: #eee;
+}
+
+.result > div {
+  color: #111;
 }
 
 /* Radio Style */

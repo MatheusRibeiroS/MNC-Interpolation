@@ -88,12 +88,13 @@ function interpolate(x, f) {
       multiStr[i + 1] = multiStr[i + 1].replace(/\+\s?$/, "");
   }
   var result = document.querySelector("#result");
-  return (
-    "<div>" +
-    pstr +
-    "</div><br /><div>" +
-    multiStr.join("").replace(/([\-\+])/g, " $1 ") +
-    "</div>"
+  return (`
+    <div>
+      ${pstr}
+    </div> 
+    <div>
+      ${multiStr.join("").replace(/([\-\+])/g, " $1 ")}
+    </div>`
   );
 }
 /*!
