@@ -1,3 +1,5 @@
+let points;
+
 const resize = () => {
   let table = document.querySelector("#table");
   let n = parseInt(document.querySelector("#n").value);
@@ -91,6 +93,7 @@ const verification = () => {
 };
 
 const calculate = () => {
+
   if (!verification()) {
     return;
   }
@@ -101,41 +104,45 @@ const calculate = () => {
 
   let { x, y } = orderedPoints(); // x and y are ordered by x
 
-  let left = z,
-    right = z;
-  let aux = 1;
-  while (aux < k) {
-    if (left > 1) {
-      left--;
-      aux++;
+  points = new Array(k);
+  let Xaux, Yaux;
+  if (n == k) {
+    for (let i = 0; i < n; i++) {
+      points[i] = new Array(2);
+      Xaux = parseFloat(document.getElementById(`P${i}${1}`).value);
+      Yaux = parseFloat(document.getElementById(`P${i}${2}`).value);
+      points[i][0] = Xaux;
+      points[i][1] = Yaux;
     }
-    if (right < n && aux < k) {
-      right++;
-      aux++;
+  } else {
+    let left = z,
+      right = z;
+    let aux = 1;
+    while (aux < k) {
+      if (left > 1) {
+        left--;
+        aux++;
+      }
+      if (right < n && aux < k) {
+        right++;
+        aux++;
+      }
+    }
+    for (let i = 0; i < k; i++) {
+      points[i] = new Array(2);
+      Xaux = parseFloat(document.getElementById(`P${left - 1}${1}`).value);
+      Yaux = parseFloat(document.getElementById(`P${left - 1}${2}`).value);
+      left++;
+      points[i][0] = Xaux;
+      points[i][1] = Yaux;
     }
   }
-  for (let i = 0; i < k; i++) {
-    points[i] = new Array(2);
-    Xaux = parseFloat(document.querySelector(`P${left - 1}${1}`).value);
-    Yaux = parseFloat(document.querySelector(`P${left - 1}${2}`).value);
-    left++;
-    points[i][0] = Xaux;
-    points[i][1] = Yaux;
-  }
-  let method = document.querySelector(`methods`);
+  let chosenMethod = document.querySelector(`methods`);
   let polynomial;
 
-  // correct function structure
-
-  /*
-  if (method[0].checked) polynomial = // funcao sistema linear
-  else if (method[1].checked) polynomial = NewtonMethod();
+  if (chosenMethod[0].checked) polynomial = linearSystemMethod();
+  else if (chosenMethod[1].checked) polynomial = NewtonMethod();
   else polynomial = NewtonGregoryMet();
-  document.getElementById(`pRes`).innerText = polynomial;
-  */
-
-  if (method[0].checked) polynomial = new NewtonMethod();
-  else if (method[1].checked) polynomial = new NewtonGregoryMet();
 
   // Definir onde será colocado o resultado na tela
 
