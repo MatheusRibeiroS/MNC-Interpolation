@@ -142,7 +142,15 @@ const calculate = () => {
   document.querySelector(`Resultado`).innerText = polynomial;
 };
 
-// Se K for menor que N - 1, A quantidade de pontos selecionados será K + 1 e pegando o valor mais próximo de z
+/** 
+  *  If k is less than n - 1, the quantity of selected points will be k + 1 and picking up the closest value to z
+  *  @param {number} n - Points
+  *  @param {number} k - Grade of the polynomial
+  *  @param {number} z - Reference value
+  *  @param {array} matrix - Matrix of Points Ordered by X -> [[x], [y]] 
+  * 
+  *  @return {array} - Selected Points f(x)
+  */
 const ySelected = (n, k, z, matrix) => {
   let { y: ySelected, x } = orderedPoints(); // y is ordered by x
 

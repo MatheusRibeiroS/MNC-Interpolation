@@ -46,7 +46,6 @@ function interpolate(x, f) {
     f = f.map(amap),
     n = Math.min(x.length, f.length),
     a = [];
-  // calculate interpolation (https://en.wikipedia.org/wiki/Newton_polynomial#Application)
   for (var i = 0; i < n; i++) {
     a[i] = f[0];
     for (var j = 1; j < n - i; j++)
