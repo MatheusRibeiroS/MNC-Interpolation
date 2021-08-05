@@ -84,9 +84,9 @@ const verification = () => {
   ) {
     console.log("Insira valores válidos para n, k e z.");
     // document.querySelector(`#result`).innerText = "Insira valores válidos para n, k e z.";
-    document.querySelector(`#n`).value = "";
-    document.querySelector(`#k`).valuek = "";
-    document.querySelector(`#z`).value = "";
+    n = "";
+    k = "";
+    z = "";
     return false;
   }
   return true;
@@ -103,7 +103,6 @@ const referencePoint = () => {
 };
 
 const calculate = () => {
-
   if (!verification()) {
     return;
   }
@@ -111,9 +110,10 @@ const calculate = () => {
   let n = parseInt(document.querySelector(`#n`).value);
   let k = parseInt(document.querySelector(`#k`).value);
   let z = parseFloat(document.querySelector(`#z`).value);
+  let resultDiv = document.querySelector(`#result-div`); 
 
   let { x, y } = orderedPoints(); // x and y are ordered by x
-  let { matrix } = getPoints(); // matrix 
+  let { matrix } = getPoints(); // matrix
   let ySelected = ySelected(n, k, z, matrix); // y selected
 
   points = new Array(k);
@@ -149,16 +149,28 @@ const calculate = () => {
       points[i][1] = Yaux;
     }
   }
-  let chosenMethod = document.querySelector(`methods`);
+  // let chosenMethod = document.querySelector(`methods`);
   let polynomial;
 
-  if (chosenMethod[0].checked) polynomial = linearSystemMethod();
-  else if (chosenMethod[1].checked) polynomial = NewtonMethod();
-  else polynomial = NewtonGregoryMet();
+  switch (document.querySelector('input[name="methods"]:checked').value) {
+    case "1":
+      polynomial = linearSystemMethod();
+      break;
+    case "2":
+      polynomial = NewtonMethod();
+      break;
+    case "3":
+      polynomial = NewtonGregoryMet();
+      break;
+
+    default:
+      break;
+  }
 
   // Definir onde será colocado o resultado na tela
 
-  document.querySelector(`Resultado`).innerText = polynomial;
+  resultDiv.style.display = "block";
+  document.querySelector(`#result-content`).innerText = polynomial;
   genChart(x, y, ySelected);
 };
 
@@ -176,7 +188,7 @@ const ySelected = (n, k, z, matrix) => {
 
   // Convert to Number
   x = x.map(Number);
-  matrix = matrix.map((el) => el.map(Number)); 
+  matrix = matrix.map((el) => el.map(Number));
   ySelected = ySelected.map(Number);
 
   if (k < n - 1) {
