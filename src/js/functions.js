@@ -167,8 +167,6 @@ const calculate = () => {
       break;
   }
 
-  // Definir onde será colocado o resultado na tela
-
   resultDiv.style.display = "block";
   document.querySelector(`#result-content`).innerText = polynomial;
   genChart(x, y, ySelected);

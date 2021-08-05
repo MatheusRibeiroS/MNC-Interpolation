@@ -2,8 +2,12 @@ const compactGauss = (A, b, n) => {
   for (let i = 0; i < n; i++) {
     let pivo = A[i][i];
     if (pivo == 0) {
-      console.log("O sistema é impossível de ser resolvido pelo método de gauss compacto pois o pivo é zero");
-      alert("O sistema é impossível de ser resolvido pelo método de gauss compacto pois o pivo é zero");
+      console.log(
+        "O sistema é impossível de ser resolvido pelo método de gauss compacto pois o pivo é zero"
+      );
+      alert(
+        "O sistema é impossível de ser resolvido pelo método de gauss compacto pois o pivo é zero"
+      );
       return;
     }
     for (let j = i + 1; j < n; j++) {
@@ -84,12 +88,13 @@ function interpolate(x, f) {
       multiStr[i + 1] = multiStr[i + 1].replace(/\+\s?$/, "");
   }
   var result = document.querySelector("#result");
-  result.innerHTML =
+  return (
     "<div>" +
     pstr +
     "</div><br /><div>" +
     multiStr.join("").replace(/([\-\+])/g, " $1 ") +
-    "</div>";
+    "</div>"
+  );
 }
 /*!
  * polynomial class with multiplication
