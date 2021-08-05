@@ -38,7 +38,7 @@
             <input type="number" id="k" min="3" max="20" placeholder="Grau do Polinômio (k, se k < n)"
               style="width: 100%;" />
 
-            <input type="number" id="z" min="1" placeholder="Ponto de Referência (z se k < n)" style="width: 100%;" />
+            <input type="number" step="any" id="z" min="1" placeholder="Ponto de Referência (z se k < n - 1)" style="width: 100%;" />
           </div>
           <!-- Calculation Buttons -->
           <div class="buttons" style="display: inline-flex; width: 100%; align-items: center; margin-bottom: 1em;">
@@ -74,7 +74,7 @@
                 <li class="switcher-methods">
                   <label class="container" for="NewtonMethod" class="radio">
                     Interpolação por Newton
-                    <input type="radio" value=2 id="NMethod" name="methods" />
+                    <input type="radio" value=2 id="NewtonMethod" name="methods" />
                     <span class="checkmark"></span>
                   </label>
                 </li>
@@ -82,7 +82,7 @@
                 <li class="switcher-methods">
                   <label class="container" for="NewtonMGregory" class="radio">
                     Interpolação por Newton-Gregory
-                    <input type="radio" value=3 id="NGregory" name="methods" />
+                    <input type="radio" value=3 id="NewtonMGregory" name="methods" />
                     <span class="checkmark"></span>
                   </label>
                 </li>

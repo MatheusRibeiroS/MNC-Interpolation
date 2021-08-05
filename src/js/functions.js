@@ -74,11 +74,11 @@ const verification = () => {
   if (
     isNaN(parseInt(n)) ||
     isNaN(parseInt(k)) ||
-    isNaN(parseInt(z)) ||
+    isNaN(parseFloat(z)) ||
     parseInt(n) < 1 ||
     parseInt(k) < 1 ||
-    parseInt(z) < 1 ||
-    parseInt(z) > parseInt(n)
+    parseFloat(z) < 1 ||
+    parseFloat(z) > parseInt(n)
   ) {
     console.log("Insira valores válidos para n, k e z.");
     // document.querySelector(`#result`).innerText = "Insira valores válidos para n, k e z.";
@@ -97,7 +97,7 @@ const calculate = () => {
 
   let n = parseInt(document.querySelector(`#n`).value);
   let k = parseInt(document.querySelector(`#k`).value);
-  let z = parseInt(document.querySelector(`#z`).value);
+  let z = parseFloat(document.querySelector(`#z`).value);
 
   let { x, y } = orderedPoints(); // x and y are ordered by x
 
@@ -142,25 +142,49 @@ const calculate = () => {
   document.querySelector(`Resultado`).innerText = polynomial;
 };
 
+// Se K for menor que N - 1, A quantidade de pontos selecionados será K + 1 e pegando o valor mais próximo de z
+const ySelected = (n, k, z, matrix) => {
+  let { y: ySelected } = orderedPoints(); // y is ordered by x
+
+  if (k < n - 1) {
+    /* Fazer que o valor selecionado seja diferente do array já presente
+     * retornar: ySelected[0] ... ySelected[k] + nearest (lenght = k + 1)
+     */
+    let nearest = matrix[0].reduce((prev, curr) =>
+      Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev
+    ); // Find the nearest value to z
+    ySelected.push(nearest);
+  }
+  // Caso contrário retornar o ySelected[0] ... ySelected[n] (lenght = n)
+};
+
 const genChart = () => {
-  let chartCanvas = document.querySelector("#chart");
-  let chartDiv = document.querySelector("#chart-div");
+  const chartCanvas = document.querySelector("#chart"),
+    chartDiv = document.querySelector("#chart-div"),
+    n = parseInt(document.querySelector("#n").value),
+    k = parseInt(document.querySelector("#k").value),
+    z = parseFloat(document.querySelector("#z").value);
+  const { x, y } = orderedPoints(); // x and y are ordered by x
 
   chartDiv.style.display = "block";
-  const { x, y } = orderedPoints(); // x and y are ordered by x
 
   const data = {
     labels: x,
     datasets: [
       {
-        label: "P(x,y) = ",
-        fillColor: "rgba(220,220,220,0.2)",
-        strokeColor: "rgba(220,220,220,1)",
-        pointColor: "rgba(220,220,220,1)",
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "rgba(220,220,220,1)",
+        type: "scatter",
+        label: "Pontos Dados",
+        cubicInterpolationMode: "monotone",
+        borderColor: "#BF1515",
+        backgroundColor: "#d12a2a",
         data: y,
+      },
+      {
+        type: "scatter",
+        label: "Pontos Calculado",
+        cubicInterpolationMode: "monotone",
+        borderColor: "#158CBF",
+        data: ySelected,
       },
     ],
   };
@@ -168,7 +192,26 @@ const genChart = () => {
   const config = {
     type: "line",
     data: data,
-    options: {},
+    options: {
+      responsive: true,
+      legend: {
+        position: "top",
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: "Graphic of Interpolation",
+        },
+      },
+      interaction: {
+        intersect: false,
+      },
+      scale: {
+        ticks: {
+          beginAtZero: true,
+        },
+      },
+    },
   };
 
   const myChart = new Chart(chartCanvas, config);
