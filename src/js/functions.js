@@ -57,7 +57,7 @@ const ySelected = (n, k, z, matrix) => {
       let nearest = x.reduce((prev, curr) =>
         Math.abs(curr - z) < Math.abs(prev - z) ? curr : prev
       ); // Find the nearest value to z
-      !ySelPolido.contains(matrix[1][matrix[0].indexOf(nearest)])
+      !ySelPolido.includes(matrix[1][matrix[0].indexOf(nearest)])
         ? ySelPolido.push(matrix[1][matrix[0].indexOf(nearest)])
         : x.splice(x.indexOf(nearest), 1); // remove the nearest value from the x vector (if it's present)
     } while (ySelPolido.length != k + 1);
