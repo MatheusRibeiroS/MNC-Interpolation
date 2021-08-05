@@ -92,6 +92,16 @@ const verification = () => {
   return true;
 };
 
+const referencePoint = () => {
+  let n = Number(document.querySelector(`#n`).value);
+  let k = Number(document.querySelector(`#k`).value);
+  let z = document.querySelector(`#z`);
+  if (n && k) {
+    if (k < n - 1) z.removeAttribute("disabled");
+    else z.setAttribute("disabled", "disabled");
+  }
+};
+
 const calculate = () => {
 
   if (!verification()) {
@@ -103,6 +113,8 @@ const calculate = () => {
   let z = parseFloat(document.querySelector(`#z`).value);
 
   let { x, y } = orderedPoints(); // x and y are ordered by x
+  let { matrix } = getPoints(); // matrix 
+  let ySelected = ySelected(n, k, z, matrix); // y selected
 
   points = new Array(k);
   let Xaux, Yaux;
@@ -147,29 +159,29 @@ const calculate = () => {
   // Definir onde será colocado o resultado na tela
 
   document.querySelector(`Resultado`).innerText = polynomial;
+  genChart(x, y, ySelected);
 };
 
-/** 
-  *  If k is less than n - 1, the quantity of selected points will be k + 1 and picking up the closest value to z
-  *  @param {number} n - Points
-  *  @param {number} k - Grade of the polynomial
-  *  @param {number} z - Reference value
-  *  @param {array} matrix - Matrix of Points Ordered by X -> [[x], [y]] 
-  * 
-  *  @return {array} - Selected Points f(x)
-  */
+/**
+ *  If k is less than n - 1, the quantity of selected points will be k + 1 and picking up the closest value to z
+ *  @param {number} n - Points
+ *  @param {number} k - Grade of the polynomial
+ *  @param {number} z - Reference value
+ *  @param {array} matrix - Matrix of Points Ordered by X -> [[x], [y]]
+ *
+ *  @return {array} - Selected Points f(x)
+ */
 const ySelected = (n, k, z, matrix) => {
   let { y: ySelected, x } = orderedPoints(); // y is ordered by x
 
   // Convert to Number
   x = x.map(Number);
-  matrix = matrix.map((el) => el.map(Number));
+  matrix = matrix.map((el) => el.map(Number)); 
   ySelected = ySelected.map(Number);
 
-  // Take the yselected values ​​from 0 to k
-  ySelected = ySelected.slice(0, k);
-
   if (k < n - 1) {
+    // Take the yselected values ​​from 0 to k
+    ySelected = ySelected.slice(0, k);
     do {
       /* Fazer que o valor selecionado seja diferente do array já presente
        * retornar: ySelected[0] ... ySelected[k] + nearest (lenght = k + 1)
@@ -186,13 +198,9 @@ const ySelected = (n, k, z, matrix) => {
   return ySelected;
 };
 
-const genChart = () => {
+const genChart = (x, y, ySelected) => {
   const chartCanvas = document.querySelector("#chart"),
-    chartDiv = document.querySelector("#chart-div"),
-    n = parseInt(document.querySelector("#n").value),
-    k = parseInt(document.querySelector("#k").value),
-    z = parseFloat(document.querySelector("#z").value);
-  const { x, y } = orderedPoints(); // x and y are ordered by x
+    chartDiv = document.querySelector("#chart-div");
 
   chartDiv.style.display = "block";
 
@@ -203,7 +211,7 @@ const genChart = () => {
         type: "scatter",
         label: "Pontos Dados",
         cubicInterpolationMode: "monotone",
-        borderColor: "#BF1515",
+        // borderColor: "#BF1515",
         backgroundColor: "#d12a2a",
         data: y,
       },
@@ -212,6 +220,7 @@ const genChart = () => {
         label: "Pontos Calculado",
         cubicInterpolationMode: "monotone",
         borderColor: "#158CBF",
+        borderWidth: 3,
         data: ySelected,
       },
     ],

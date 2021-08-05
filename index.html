@@ -33,16 +33,13 @@
         <div class="config">
           <div class="input-menu">
             <input type="number" id="n" min="1" max="20" onchange="this.value = this.value.replace(/,/g, '.')"
-              placeholder="Número n de pontos (com 0 < n)"
-              style="width: 100%;" oninput="resize()" />
+              placeholder="Número n de pontos (com 0 < n)" style="width: 100%;" oninput="resize(); referencePoint();" />
 
             <input type="number" id="k" min="3" max="20" onchange="this.value = this.value.replace(/,/g, '.')"
-              placeholder="Grau do Polinômio (k, se k < n)"
-              style="width: 100%;" />
+              placeholder="Grau do Polinômio (k, se k < n)" style="width: 100%;" oninput="referencePoint();" />
 
             <input type="number" step="any" id="z" min="1" onchange="this.value = this.value.replace(/,/g, '.')"
-              placeholder="Ponto de Referência (z se k < n - 1)"
-              style="width: 100%;" />
+              placeholder="Ponto de Referência (z se k < n - 1)" style="width: 100%;" disabled />
           </div>
           <!-- Calculation Buttons -->
           <div class="buttons" style="display: inline-flex; width: 100%; align-items: center; margin-bottom: 1em;">
