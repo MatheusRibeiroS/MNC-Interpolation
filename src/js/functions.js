@@ -149,20 +149,41 @@ const calculate = () => {
   document.querySelector(`Resultado`).innerText = polynomial;
 };
 
-// Se K for menor que N - 1, A quantidade de pontos selecionados será K + 1 e pegando o valor mais próximo de z
+/** 
+  *  If k is less than n - 1, the quantity of selected points will be k + 1 and picking up the closest value to z
+  *  @param {number} n - Points
+  *  @param {number} k - Grade of the polynomial
+  *  @param {number} z - Reference value
+  *  @param {array} matrix - Matrix of Points Ordered by X -> [[x], [y]] 
+  * 
+  *  @return {array} - Selected Points f(x)
+  */
 const ySelected = (n, k, z, matrix) => {
-  let { y: ySelected } = orderedPoints(); // y is ordered by x
+  let { y: ySelected, x } = orderedPoints(); // y is ordered by x
+
+  // Convert to Number
+  x = x.map(Number);
+  matrix = matrix.map((el) => el.map(Number));
+  ySelected = ySelected.map(Number);
+
+  // Take the yselected values ​​from 0 to k
+  ySelected = ySelected.slice(0, k);
 
   if (k < n - 1) {
-    /* Fazer que o valor selecionado seja diferente do array já presente
-     * retornar: ySelected[0] ... ySelected[k] + nearest (lenght = k + 1)
-     */
-    let nearest = matrix[0].reduce((prev, curr) =>
-      Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev
-    ); // Find the nearest value to z
-    ySelected.push(nearest);
+    do {
+      /* Fazer que o valor selecionado seja diferente do array já presente
+       * retornar: ySelected[0] ... ySelected[k] + nearest (lenght = k + 1)
+       */
+      let nearest = x.reduce((prev, curr) =>
+        Math.abs(curr - z) < Math.abs(prev - z) ? curr : prev
+      ); // Find the nearest value to z
+      !ySelected.contains(matrix[1][matrix[0].indexOf(nearest)])
+        ? ySelected.push(matrix[1][matrix[0].indexOf(nearest)])
+        : x.splice(x.indexOf(nearest), 1); // remove the nearest value from the x vector (if it's present)
+    } while (ySelected.length != k + 1);
   }
   // Caso contrário retornar o ySelected[0] ... ySelected[n] (lenght = n)
+  return ySelected;
 };
 
 const genChart = () => {
