@@ -32,13 +32,17 @@
         <!-- Essential settings -->
         <div class="config">
           <div class="input-menu">
-            <input type="number" id="n" min="1" max="20" placeholder="Número n de pontos (com 0 < n)"
+            <input type="number" id="n" min="1" max="20" onchange="this.value = this.value.replace(/,/g, '.')"
+              placeholder="Número n de pontos (com 0 < n)"
               style="width: 100%;" oninput="resize()" />
 
-            <input type="number" id="k" min="3" max="20" placeholder="Grau do Polinômio (k, se k < n)"
+            <input type="number" id="k" min="3" max="20" onchange="this.value = this.value.replace(/,/g, '.')"
+              placeholder="Grau do Polinômio (k, se k < n)"
               style="width: 100%;" />
 
-            <input type="number" step="any" id="z" min="1" placeholder="Ponto de Referência (z se k < n - 1)" style="width: 100%;" />
+            <input type="number" step="any" id="z" min="1" onchange="this.value = this.value.replace(/,/g, '.')"
+              placeholder="Ponto de Referência (z se k < n - 1)"
+              style="width: 100%;" />
           </div>
           <!-- Calculation Buttons -->
           <div class="buttons" style="display: inline-flex; width: 100%; align-items: center; margin-bottom: 1em;">
@@ -105,6 +109,18 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="./src/js/functions.js"></script>
   <script src="./src/js/methods.js"></script>
+  <script>
+    // Adicionando contains
+    Array.prototype.contains = function (obj) {
+      var i = this.length;
+      while (i--) {
+        if (this[i] === obj) {
+          return true;
+        }
+      }
+      return false;
+    }
+  </script>
 </body>
 
 </html>
