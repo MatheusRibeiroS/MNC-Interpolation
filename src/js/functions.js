@@ -66,6 +66,9 @@ const ySelected = (n, k, z, matrix) => {
   return ySelPolido;
 };
 
+const mathFunction = (input, x) =>
+  x.map((el) => math.evaluate(input, { x: el }));
+
 const resize = () => {
   let table = document.querySelector("#table");
   let n = parseInt(document.querySelector("#n").value);
@@ -143,49 +146,13 @@ const calculate = () => {
     return;
   }
 
-  let n = parseInt(document.querySelector(`#n`).value);
-  let k = parseInt(document.querySelector(`#k`).value);
-  let z = parseFloat(document.querySelector(`#z`).value);
-  let resultDiv = document.querySelector(`#result-div`);
+  const n = parseInt(document.querySelector(`#n`).value);
+  const k = parseInt(document.querySelector(`#k`).value);
+  const z = parseFloat(document.querySelector(`#z`).value);
+  const resultDiv = document.querySelector(`#result-div`);
 
-  let { x, y } = orderedPoints(); // x and y are ordered by x
-  let { matrix } = getPoints(); // matrix
-  let ySelPolido = ySelected(n, k, z, matrix); // y selected
-
-  // points = new Array(k);
-  // let Xaux, Yaux;
-  // if (n == k) {
-  //   for (let i = 0; i < n; i++) {
-  //     points[i] = new Array(2);
-  //     Xaux = parseFloat(document.getElementById(`P${i}${1}`).value);
-  //     Yaux = parseFloat(document.getElementById(`P${i}${2}`).value);
-  //     points[i][0] = Xaux;
-  //     points[i][1] = Yaux;
-  //   }
-  // } else {
-  //   let left = z,
-  //     right = z;
-  //   let aux = 1;
-  //   while (aux < k) {
-  //     if (left > 1) {
-  //       left--;
-  //       aux++;
-  //     }
-  //     if (right < n && aux < k) {
-  //       right++;
-  //       aux++;
-  //     }
-  //   }
-  //   for (let i = 0; i < k; i++) {
-  //     points[i] = new Array(2);
-  //     Xaux = parseFloat(document.getElementById(`P${left - 1}${1}`).value);
-  //     Yaux = parseFloat(document.getElementById(`P${left - 1}${2}`).value);
-  //     left++;
-  //     points[i][0] = Xaux;
-  //     points[i][1] = Yaux;
-  //   }
-  // }
-  // let chosenMethod = document.querySelector(`methods`);
+  const { x, y } = orderedPoints(); // x and y are ordered by x
+  const { matrix } = getPoints(); // matrix
   let polynomial;
 
   switch (document.querySelector('input[name="methods"]:checked').value) {
@@ -193,7 +160,7 @@ const calculate = () => {
       polynomial = linearSystemMethod();
       break;
     case "2":
-      polynomial = interpolate(x, ySelPolido);
+      polynomial = interpolate(x, ySelected(n, k, z, matrix));
       break;
     case "3":
       polynomial = NewtonGregoryMet();
@@ -203,14 +170,20 @@ const calculate = () => {
       break;
   }
 
+  console.log(polynomial);
+
   resultDiv.style.display = "block";
   document.querySelector(`#result-content`).innerHTML = polynomial;
-  genChart(x, y, ySelected);
+  genChart(x, y, ySelected(n, k, z, matrix));
 };
 
 const genChart = (x, y, ySelected) => {
-  const chartCanvas = document.querySelector("#chart"),
-    chartDiv = document.querySelector("#chart-div");
+  const chartDiv = document.querySelector("#chart-div");
+  const chartCanvas = document.createElement("canvas");
+  chartCanvas.id = "chart";
+
+  if (chartDiv.firstChild) chartDiv.removeChild(chartDiv.firstChild);
+  chartDiv.appendChild(chartCanvas);
 
   chartDiv.style.display = "block";
 
@@ -233,6 +206,16 @@ const genChart = (x, y, ySelected) => {
         borderWidth: 5,
         data: ySelected,
       },
+      {
+        type: "line",
+        label: "Polinômio",
+        cubicInterpolationMode: "monotone",
+        borderColor: "#737373",
+        borderWidth: 1,
+        data: mathFunction(document.querySelector("#resultfinal").innerText, x),
+        pointRadius: 0,
+        
+      },
     ],
   };
 
@@ -249,6 +232,17 @@ const genChart = (x, y, ySelected) => {
           display: true,
           text: "Graphic of Interpolation",
         },
+        beforeInit: function (chart) {
+          var data = chart.config.data;
+          for (var i = 0; i < data.datasets.length; i++) {
+            for (var j = 0; j < data.labels.length; j++) {
+              var fct = data.datasets[i].function,
+                x = data.labels[j],
+                y = fct(x);
+              data.datasets[i].data.push(y);
+            }
+          }
+        },
       },
       interaction: {
         intersect: false,
@@ -260,6 +254,5 @@ const genChart = (x, y, ySelected) => {
       },
     },
   };
-
   const myChart = new Chart(chartCanvas, config);
 };

@@ -88,14 +88,15 @@ function interpolate(x, f) {
       multiStr[i + 1] = multiStr[i + 1].replace(/\+\s?$/, "");
   }
   var result = document.querySelector("#result");
-  return (`
-    <div>
-      ${pstr}
+  return `
+    <div id="resultfinal" style="display: flex;">
+      <span>
+        <strong>P<sub>${document.querySelector("#k").value}</sub>(x) = </strong>
+      <span id="resultfinal">${pstr}</span></span>
     </div> 
     <div>
       ${multiStr.join("").replace(/([\-\+])/g, " $1 ")}
-    </div>`
-  );
+    </div>`;
 }
 /*!
  * polynomial class with multiplication
