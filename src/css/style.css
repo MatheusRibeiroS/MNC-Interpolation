@@ -117,3 +117,10 @@ div.options-menu {
   font-weight: bold;
   padding: 0.5em 1em;
 }
+
+#text {
+  padding: 1.5em;
+  font-weight: bold;
+  font-size: 16px;
+  font-style: italic;
+}
