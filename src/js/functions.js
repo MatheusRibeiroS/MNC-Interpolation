@@ -113,6 +113,10 @@ const infoButton = () => {
   textTable.innerHTML = "Feito por Cassiano Rodrigues e Matheus Ribeiro";
 };
 
+const clearInputs = () => {
+  [...document.getElementsByTagName("input")].map((el) => (el.value = ""));
+};
+
 const verification = () => {
   let n = document.querySelector(`#n`).value;
   let k = document.querySelector(`#k`).value;
