@@ -109,6 +109,7 @@ const resize = () => {
 
 const infoButton = () => {
   let textTable = document.querySelector("#text");
+  textTable.style.display = "block";
   textTable.innerHTML = "Feito por Matheus Ribeiro e Cassiano Rodrigues";
 };
 
@@ -120,11 +121,8 @@ const verification = () => {
   if (
     isNaN(parseInt(n)) ||
     isNaN(parseInt(k)) ||
-    isNaN(parseFloat(z)) ||
     parseInt(n) < 1 ||
-    parseInt(k) < 1 ||
-    parseFloat(z) < 1 ||
-    parseFloat(z) > parseInt(n)
+    parseInt(k) < 1
   ) {
     console.log("Insira valores válidos para n, k e z.");
     // document.querySelector(`#result`).innerText = "Insira valores válidos para n, k e z.";
@@ -133,6 +131,12 @@ const verification = () => {
     z = "";
     return false;
   }
+  z
+    ? isNaN(parseFloat(z)) || parseFloat(z) < 1 || parseFloat(z) > parseInt(n)
+      ? false
+      : true
+    : false;
+
   return true;
 };
 
@@ -174,8 +178,6 @@ const calculate = () => {
     default:
       break;
   }
-
-  console.log(polynomial);
 
   resultDiv.style.display = "block";
   document.querySelector(`#result-content`).innerHTML = polynomial;
@@ -219,7 +221,6 @@ const genChart = (x, y, ySelected) => {
         borderWidth: 1,
         data: mathFunction(document.querySelector("#resultfinal").innerText, x),
         pointRadius: 0,
-        
       },
     ],
   };

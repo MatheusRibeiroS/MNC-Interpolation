@@ -44,10 +44,9 @@
           <!-- Calculation Buttons -->
           <div class="buttons" style="display: inline-flex; width: 100%; align-items: center; margin-bottom: 1em;">
             <button class="btn" id="button-info" onclick="infoButton()"><i class="fas fa-info-circle"></i></button>
-            <a href="https://en.wikipedia.org/wiki/Interpolation">
-              <button class="btn" id="button-docs"  style="margin-right: 1em;"><i class="fas fa-file-alt"></i></button>
+            <a href="https://en.wikipedia.org/wiki/Interpolation" target="__blank">
+              <button class="btn" id="button-docs" style="margin-right: 1em;"><i class="fas fa-file-alt"></i></button>
             </a>
-            
 
             <button class="btn" id="button-clear" onclick="clear()"><i class="fas fa-trash"></i></button>
             <button class="btn" id="button-calculate" onclick="calculate()" style="width: 50%;">
@@ -57,65 +56,63 @@
           </div>
 
           <!-- Info Button Text-->
-          <div id="input-text" style="width: 100%; overflow: auto;">
+          <div id="text" style="display: none;"></div>
+
+
+          <!-- Vector with points -->
+          <div id="config-table" style="width: 100%; overflow: auto;">
             <div class="matrix" style="width: 100%; overflow: auto;">
-              <table id="text"></table>
-
-
-              <!-- Vector with points -->
-              <div id="config-table" style="width: 100%; overflow: auto;">
-                <div class="matrix" style="width: 100%; overflow: auto;">
-                  <table id="table"></table>
-                </div>
-              </div>
-
-              <div class="radio-methods">
-                <div>
-                  <span class="divider-methods">Métodos</span>
-
-                  <ul>
-                    <!-- Default: SISTEMA LINEAR -->
-                    <li class="switcher-methods">
-                      <label class="container" for="simpleGauss" class="radio">
-                        Interpolação com Sistema Linear
-                        <input type="radio" value=1 id="simpleGauss" name="methods" checked />
-                        <span class="checkmark"></span>
-                      </label>
-                    </li>
-
-                    <li class="switcher-methods">
-                      <label class="container" for="NewtonMethod" class="radio">
-                        Interpolação por Newton
-                        <input type="radio" value=2 id="NewtonMethod" name="methods" />
-                        <span class="checkmark"></span>
-                      </label>
-                    </li>
-
-                    <li class="switcher-methods">
-                      <label class="container" for="NewtonMGregory" class="radio">
-                        Interpolação por Newton-Gregory
-                        <input type="radio" value=3 id="NewtonMGregory" name="methods" />
-                        <span class="checkmark"></span>
-                      </label>
-                    </li>
-
-                  </ul>
-                </div>
-              </div>
+              <table id="table"></table>
             </div>
+          </div>
 
+          <div class="radio-methods">
+            <div>
+              <span class="divider-methods">Métodos</span>
+
+              <ul>
+                <!-- Default: SISTEMA LINEAR -->
+                <li class="switcher-methods">
+                  <label class="container" for="simpleGauss" class="radio">
+                    Interpolação com Sistema Linear
+                    <input type="radio" value=1 id="simpleGauss" name="methods" checked />
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+
+                <li class="switcher-methods">
+                  <label class="container" for="NewtonMethod" class="radio">
+                    Interpolação por Newton
+                    <input type="radio" value=2 id="NewtonMethod" name="methods" />
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+
+                <li class="switcher-methods">
+                  <label class="container" for="NewtonMGregory" class="radio">
+                    Interpolação por Newton-Gregory
+                    <input type="radio" value=3 id="NewtonMGregory" name="methods" />
+                    <span class="checkmark"></span>
+                  </label>
+                </li>
+
+              </ul>
+            </div>
           </div>
         </div>
 
-        <div class="result" id="result-div">
-          <div id="result-content"></div>
-        </div>
+      </div>
+    </div>
+
+    <div class="result" id="result-div">
+      <div id="result-content"></div>
+    </div>
 
     <div class="chart" id="chart-div">
       <!-- <canvas id="chart"></canvas> -->
     </div>
 
-      </div>
+  </div>
 
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" data-auto-a11y="true"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

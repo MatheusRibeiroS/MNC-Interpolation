@@ -89,7 +89,7 @@ function interpolate(x, f) {
   }
   var result = document.querySelector("#result");
   return `
-    <div id="resultfinal" style="display: flex;">
+    <div style="display: flex;">
       <span>
         <strong>P<sub>${document.querySelector("#k").value}</sub>(x) = </strong>
       <span id="resultfinal">${pstr}</span></span>
