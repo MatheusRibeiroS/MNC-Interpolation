@@ -144,7 +144,7 @@ const referencePoint = () => {
   let n = Number(document.querySelector(`#n`).value);
   let k = Number(document.querySelector(`#k`).value);
   let z = document.querySelector(`#z`);
-  if (n && k) {
+  if (n && k && k > 0) {
     if (k < n - 1) z.removeAttribute("disabled");
     else z.setAttribute("disabled", "disabled");
   } else z.setAttribute("disabled", "disabled");
