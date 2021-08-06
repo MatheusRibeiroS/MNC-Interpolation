@@ -107,6 +107,11 @@ const resize = () => {
   for (let index = 0; index < 3; index++) table.appendChild(row[index]);
 };
 
+const infoButton = () => {
+  let textTable = document.querySelector("#text");
+  textTable.innerHTML = "Feito por Matheus Ribeiro e Cassiano Rodrigues";
+};
+
 const verification = () => {
   let n = document.querySelector(`#n`).value;
   let k = document.querySelector(`#k`).value;
