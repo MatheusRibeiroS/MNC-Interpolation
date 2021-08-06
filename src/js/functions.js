@@ -110,7 +110,7 @@ const resize = () => {
 const infoButton = () => {
   let textTable = document.querySelector("#text");
   textTable.style.display = "block";
-  textTable.innerHTML = "Feito por Matheus Ribeiro e Cassiano Rodrigues";
+  textTable.innerHTML = "Feito por Cassiano Rodrigues e Matheus Ribeiro";
 };
 
 const verification = () => {
